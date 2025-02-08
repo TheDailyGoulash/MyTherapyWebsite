@@ -1,48 +1,41 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-import './index.css';
+import React from "react";
+import { motion } from "framer-motion";
 
-export default function App() {
-  const [inkblotOpacity, setInkblotOpacity] = useState(0);
-
-  useEffect(() => {
-    setTimeout(() => setInkblotOpacity(1), 500); // Delay inkblot fade-in
-  }, []);
-
+const App = () => {
   return (
-    <div className="relative h-screen w-full flex items-center justify-center bg-black overflow-hidden">
-      {/* Inkblot Background */}
+    <div className="relative min-h-screen bg-black text-white flex items-center justify-center">
+      {/* Background Inkblot Effect */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: inkblotOpacity, scale: 1 }}
-        transition={{ duration: 2, ease: 'easeOut' }}
-        className="absolute top-0 left-0 w-full h-full bg-cover bg-center opacity-60"
-        style={{ backgroundImage: "url('https://source.unsplash.com/1600x900/?ink,abstract')" }}
+        className="absolute inset-0 bg-noise"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.2 }}
+        transition={{ duration: 2 }}
       />
 
       {/* Content */}
-      <motion.div 
+      <motion.div
+        className="z-10 text-center p-6"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5 }}
-        className="z-10 text-center text-white"
+        transition={{ duration: 1.5, ease: "easeOut" }}
       >
-        <h1 className="text-5xl md:text-6xl font-serif tracking-wide">
+        <h1 className="text-5xl font-bold mb-4">
           Exploring the Depths of the Psyche
         </h1>
-        <p className="text-lg md:text-xl mt-4 opacity-80">
+        <p className="text-lg text-gray-400 mb-6">
           A journey through the unconscious, shadow work, and personal transformation.
         </p>
         
-        {/* Animated Button */}
         <motion.button
+          className="px-6 py-3 text-lg font-semibold bg-white text-black rounded-lg shadow-lg hover:bg-gray-300 transition"
           whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-8 px-6 py-3 bg-white text-black font-semibold rounded-xl shadow-lg hover:bg-gray-200 transition"
+          whileTap={{ scale: 0.9 }}
         >
           Begin
         </motion.button>
       </motion.div>
     </div>
   );
-}
+};
+
+export default App;
